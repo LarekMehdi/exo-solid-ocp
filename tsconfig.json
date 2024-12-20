@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+      "target": "ES2020",              // Version d'ECMAScript cible
+      "module": "CommonJS",            // Système de modules utilisé
+      "lib": ["ES2020"],              // Bibliothèques à inclure
+      "outDir": "./dist",             // Dossier de sortie pour les fichiers compilés
+      "rootDir": "./src",             // Dossier source
+      "strict": true,                 // Active toutes les vérifications strictes
+      "esModuleInterop": true,        // Permet l'import/export plus naturel
+      "skipLibCheck": true,           // Accélère la compilation
+      "forceConsistentCasingInFileNames": true,  // Évite les problèmes de casse dans les imports
+      "experimentalDecorators": true,  // Active les décorateurs (utile pour les contrôleurs)
+      "emitDecoratorMetadata": true,   // Émet les métadonnées pour les décorateurs
+      "resolveJsonModule": true,       // Permet d'importer des fichiers JSON
+      "declaration": true,             // Génère les fichiers de déclaration .d.ts
+      "sourceMap": true               // Génère les source maps pour le débogage
+    },
+    "include": [
+      "src/**/*"                      // Fichiers à inclure dans la compilation
+    ],
+    "exclude": [
+      "node_modules",                 // Fichiers à exclure
+      "dist"
+    ]
+  }
+  
+  
