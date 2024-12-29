@@ -6,4 +6,4 @@ Les énoncés de départ sont commentés.
 
 # Fichier single_responsability.ts
 
-Pas encore fait ces exercices la.
+Le fichier compile et n'a plus d'erreurs, mais la logique métier n'a pas vraiment changé. Je vois pas trop quoi modifier, pour moi chaque methode ne fait qu'une chose, a par peut etre processOrder, mais elle ne fait qu'appeller d'autre traitement. Elle fait bien ce que son nom indique.
