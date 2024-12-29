@@ -368,6 +368,10 @@ export class PaymentProcessor {
         return this.paymentData.method.processPayment(this.paymentData.amount, this.paymentData.currency);
     }
 
+    async process(total: number) {
+
+    }
+
 }
 
 

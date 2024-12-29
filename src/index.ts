@@ -1,4 +1,5 @@
-import { AgeDataType, BankPayment, CryptoPayment, EmailDataType, EmailType, FormValidator, NotificationSystem, PasswordDataType, PaymentProcessor, PayPalPayment, SmsType } from "./exoSolidOCP";
+import { AgeDataType, BankPayment, CryptoPayment, EmailDataType, EmailType, FormValidator, NotificationSystem, PasswordDataType, PayPalPayment, SmsType } from "./exoSolidOCP";
+import { PaymentProcessor } from "./service/PaymentProcessor";
 
 // SOLID OCP 1
 console.log();

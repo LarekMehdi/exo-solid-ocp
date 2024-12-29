@@ -1,6 +1,11 @@
+import { PaymentProcessor } from "./exoSolidOCP";
+import { Customer } from "./model/Customer";
+import { Invoice } from "./model/Invoice";
+import { OrderItem } from "./model/OrderItem";
+import { EmailService } from "./service/EmailService";
+import { InventoryManager } from "./service/InventoryManager";
+
 class Database {
-
-
     save(table: string, extra: any ): void {}
 }
 
@@ -9,7 +14,7 @@ class BlogPost {
     content: string;
     author: string;
     tags: string[];
-    id: number;
+    id: number | null = null;
     private database: Database;
 
     constructor(title: string, content: string, author: string) {
@@ -18,6 +23,10 @@ class BlogPost {
         this.author = author;
         this.tags = [];
         this.database = new Database();
+    }
+
+    setId(id: number): void {
+        this.id = id;
     }
 
     save(): void {
@@ -69,14 +78,14 @@ class Order {
     constructor(customer: Customer) {
         this.items = [];
         this.customer = customer;
-        this.paymentProcessor = new PaymentProcessor();
+        this.paymentProcessor = new PaymentProcessor({});
         this.inventoryManager = new InventoryManager();
         this.emailService = new EmailService();
     }
 
     addItem(item: OrderItem): void {
         // Vérification du stock
-        if (!this.inventoryManager.checkStock(item.productId)) {
+        if (!this.inventoryManager.checkStock(item.getProductId())) {
             throw new Error("Produit non disponible");
         }
         this.items.push(item);
@@ -91,18 +100,18 @@ class Order {
 
         // Mise à jour du stock
         this.items.forEach((item) => {
-            this.inventoryManager.decrementStock(item.productId);
+            this.inventoryManager.decrementStock(item.getProductId());
         });
 
         // Génération de la facture
         const invoice = this.generateInvoice();
 
         // Envoi de la confirmation par email
-        await this.emailService.sendOrderConfirmation(this.customer.email, invoice);
+        await this.emailService.sendOrderConfirmation(this.customer.getEmail(), invoice);
     }
 
     private calculateTotal(): number {
-        return this.items.reduce((sum, item) => sum + item.price, 0);
+        return this.items.reduce((sum, item) => sum + item.getPrice(), 0);
     }
 
     private generateInvoice(): Invoice {
